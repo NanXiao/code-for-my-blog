@@ -15,7 +15,7 @@ foo()
 int
 main()
 {
-	array = malloc(sizeof(int) * 4);
-	ASAN_POISON_MEMORY_REGION(array, sizeof(int) * 4);
+	array = malloc(sizeof(int) * ARRAY_SIZE);
+	ASAN_POISON_MEMORY_REGION(array, sizeof(int) * ARRAY_SIZE);
 	foo();
 }
