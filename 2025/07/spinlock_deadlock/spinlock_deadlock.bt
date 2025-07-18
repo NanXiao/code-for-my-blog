@@ -1,0 +1,10 @@
+// sudo bpftrace -p `pgrep program` -o spinlock_stack.txt spinlock_deadlock.bt 
+uprobe:/usr/lib64/libpthread.so.0:pthread_spin_lock
+{
+    @spin_locks[comm, tid, arg0] = ustack;
+}
+
+uprobe:/usr/lib64/libpthread.so.0:pthread_spin_unlock
+{
+    delete(@spin_locks[comm, tid, arg0]);
+}
